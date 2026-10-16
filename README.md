@@ -152,7 +152,32 @@ The model misses approximately 46% of labeled threats and 49% of identity-hate c
 
 These limitations make human oversight essential.
 
-## 10. Streamlit Application
+## 10. Threat Review Threshold Validation
+
+The application separates toxicity classification thresholds from human-review routing thresholds.
+
+The threat classification threshold was optimized at 0.85 using validation F1-score.
+
+An additional experimental priority-review threshold of 0.70 was evaluated.
+
+**Validation results at threshold 0.70:**
+
+- Validation comments: 15,957
+- Actual labeled threats: 37
+- Messages flagged: 72
+- True positives: 20
+- False positives: 52
+- False negatives: 17
+- Precision: 27.8%
+- Recall: 54.1%
+
+Lowering the threshold from 0.85 to 0.70 identified two additional labeled threats while generating 20 additional false-positive flags.
+
+The 0.70 threshold is retained as an experimental demonstration of human-review routing, not a production-approved moderation threshold.
+
+The model requires additional contextual evaluation, stronger rare-class detection, and human oversight before operational deployment.
+
+## 11. Streamlit Application
 
 The deployed application supports:
 
@@ -163,7 +188,7 @@ The deployed application supports:
 
 The application does not automatically block, penalize, or enforce actions against users.
 
-## 11. Known Limitations
+## 12. Known Limitations
 
 - Lower recall for rare categories, especially threats and identity hate.
 - Potential false positives when messages quote or report abusive language.
@@ -175,7 +200,7 @@ The application does not automatically block, penalize, or enforce actions again
 - Duplicate and near-duplicate leakage checks across data splits remain to be completed.
 - No dedicated phishing or scam classifier is included.
 
-## 12. Future Improvements
+## 13. Future Improvements
 
 - Evaluate separate human-review and classification thresholds.
 - Perform duplicate and near-duplicate leakage checks.
@@ -185,7 +210,7 @@ The application does not automatically block, penalize, or enforce actions again
 - Add an independently labeled phishing/scam dataset.
 - Introduce confidence calibration and a structured human-review workflow.
 
-## 13. Responsible AI
+## 14. Responsible AI
 
 This application is intended for educational research and decision support.
 
@@ -193,7 +218,7 @@ Model predictions may be incorrect, and potentially harmful messages may go unde
 
 Consequential moderation actions should involve appropriately authorized human review.
 
-## 14. Author
+## 15. Author
 
 Independent Applied AI / NLP portfolio project focused on content moderation, Trust & Safety, and risk decision systems.
 
