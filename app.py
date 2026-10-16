@@ -92,16 +92,40 @@ if st.button("Analyze Message", type="primary"):
             )
             st.progress(min(max(score, 0.0), 1.0))
 
+        
         st.subheader("Moderation Recommendation")
 
-        if "threat" in detected or "identity_hate" in detected:
-            st.error("Priority human review recommended.")
+        # Experimental threshold for possible threats
+        threat_review_threshold = 0.70
+
+        if "threat" in detected:
+            st.error(
+                "Threat detected. Priority human review recommended."
+            )
+
+        elif scores["threat"] >= threat_review_threshold:
+            st.error(
+                "Possible threat detected below classification "
+                "threshold. Priority human review recommended."
+            )
+
+        elif "identity_hate" in detected:
+            st.error(
+                "Potential identity-based hate. "
+                "Priority human review recommended."
+            )
 
         elif detected:
-            st.warning("Human moderation review recommended.")
+            st.warning(
+                "Potentially harmful communication. "
+                "Human moderation review recommended."
+            )
 
         else:
-            st.success("No immediate review suggested.")
+            st.info(
+                "No category exceeded its threshold. "
+                "This does not guarantee the message is safe."
+            )
 
         st.caption(
             "Scores are uncalibrated model estimates. "
